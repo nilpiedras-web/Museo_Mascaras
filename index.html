@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Museo de máscaras · Singular Club</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Archivo:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   SINGULAR CLUB · Sistema de diseño
+   Cambia los tokens aquí para actualizar la marca en todo el archivo
+   ============================================================ */
+:root{
+  --carbon:#171511;
+  --crema:#F2EFE6;
+  --ocre:#DDA73E;
+  --terracota:#B5532A;
+  --carbon-suave:#221F19;
+  --crema-40:rgba(242,239,230,0.4);
+  --crema-15:rgba(242,239,230,0.15);
+  --crema-08:rgba(242,239,230,0.08);
+  --f-display:'Fraunces',Georgia,serif;
+  --f-body:'Hanken Grotesk',system-ui,sans-serif;
+  --f-mono:'IBM Plex Mono',monospace;
+  --f-label:'Archivo',system-ui,sans-serif;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--carbon);
+  color:var(--crema);
+  font-family:var(--f-body);
+  font-size:17px;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+
+.wrap{max-width:720px;margin:0 auto;padding:0 24px}
+@media (max-width:600px){
+  .wrap{padding:0 clamp(22px,8vw,34px)}
+}
+
+.eyebrow{
+  font-family:var(--f-mono);
+  font-size:12px;
+  letter-spacing:0.14em;
+  text-transform:uppercase;
+  color:var(--ocre);
+  text-shadow:0 0 16px rgba(221,167,62,0.55);
+}
+.reveal{opacity:0;transform:translateY(18px);transition:opacity 0.6s ease,transform 0.6s ease}
+.reveal.visible{opacity:1;transform:none}
+
+/* ---------- Hero ---------- */
+.hero{padding-top:72px;padding-bottom:48px;text-align:center}
+.badge{
+  display:inline-block;
+  background:var(--crema);
+  color:var(--carbon);
+  font-family:var(--f-label);
+  font-weight:700;
+  font-size:12px;
+  letter-spacing:0.16em;
+  text-transform:uppercase;
+  padding:7px 16px;
+  border-radius:100px;
+  margin-bottom:28px;
+}
+.hero h1{
+  font-family:var(--f-display);
+  font-weight:600;
+  font-size:clamp(34px,6vw,52px);
+  line-height:1.08;
+  letter-spacing:-0.01em;
+  margin-bottom:18px;
+}
+.hero h1 em{font-style:italic;color:var(--ocre);text-shadow:0 0 24px rgba(221,167,62,0.5)}
+.hero .sub{font-size:19px;max-width:56ch;margin-left:auto;margin-right:auto;color:rgba(242,239,230,0.72)}
+
+/* ---------- Tarjetas de intro ---------- */
+.card{
+  background:var(--carbon-suave);
+  border:1px solid var(--crema-15);
+  border-radius:16px;
+  padding:28px;
+  margin-bottom:20px;
+}
+.card h2{font-family:var(--f-display);font-weight:600;font-size:24px;margin-bottom:12px}
+.card p{color:rgba(242,239,230,0.82);margin-bottom:12px}
+.card p:last-child{margin-bottom:0}
+.card strong{color:var(--crema);font-weight:600}
+.privacidad{font-family:var(--f-mono);font-size:12.5px;color:var(--crema-40);margin-top:16px}
+
+/* ---------- Botones ---------- */
+.btn{
+  display:inline-block;
+  font-family:var(--f-label);
+  font-weight:700;
+  font-size:16px;
+  letter-spacing:0.02em;
+  background:var(--ocre);
+  color:var(--carbon);
+  border:none;
+  border-radius:100px;
+  padding:15px 34px;
+  cursor:pointer;
+  transition:transform 0.15s ease,background 0.15s ease;
+  box-shadow:0 0 18px rgba(221,167,62,0.35),0 0 44px rgba(221,167,62,0.14);
+}
+.btn:hover{background:#E8B54E;transform:translateY(-1px);box-shadow:0 0 26px rgba(221,167,62,0.55),0 0 64px rgba(221,167,62,0.22)}
+.btn:focus-visible{outline:3px solid var(--crema);outline-offset:3px}
+.btn.secundario{
+  background:transparent;color:var(--crema);
+  border:1.5px solid var(--crema-40);
+  box-shadow:0 0 14px rgba(242,239,230,0.1);
+}
+.btn.secundario:hover{border-color:var(--crema);background:var(--crema-08);box-shadow:0 0 22px rgba(242,239,230,0.2)}
+
+/* ---------- Salas del museo ---------- */
+.sala{padding:64px 0 28px;border-top:1px solid var(--crema-08)}
+.placa{
+  display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 16px;
+  margin-bottom:26px;
+}
+.placa .num-pieza{
+  font-family:var(--f-mono);
+  font-size:12px;
+  letter-spacing:0.14em;
+  text-transform:uppercase;
+  color:var(--ocre);
+  text-shadow:0 0 14px rgba(221,167,62,0.5);
+}
+.placa .adquisicion{
+  font-family:var(--f-mono);
+  font-size:12px;
+  color:var(--crema-40);
+}
+
+.vitrina{
+  position:relative;
+  background:var(--carbon-suave);
+  border:1px solid var(--crema-15);
+  border-radius:18px;
+  padding:36px 20px 30px;
+  margin-bottom:26px;
+  overflow:hidden;
+}
+.vitrina .foco{
+  position:absolute;inset:0;
+  pointer-events:none;
+}
+.vitrina svg{
+  position:relative;
+  display:block;
+  width:min(210px,58vw);
+  height:auto;
+  margin:0 auto;
+}
+.vitrina .titulo-pieza{
+  position:relative;
+  text-align:center;
+  font-family:var(--f-display);
+  font-weight:600;
+  font-size:clamp(26px,5vw,34px);
+  margin-top:22px;
+}
+.vitrina .lema{
+  position:relative;
+  text-align:center;
+  font-family:var(--f-display);
+  font-style:italic;
+  font-weight:500;
+  font-size:16.5px;
+  color:rgba(242,239,230,0.62);
+  margin-top:6px;
+}
+
+.sala .narrativa{color:rgba(242,239,230,0.85);font-size:17.5px;margin-bottom:22px}
+
+.ficha{display:grid;gap:14px;margin-bottom:22px}
+@media (min-width:640px){.ficha{grid-template-columns:1fr 1fr}}
+.ficha .campo{
+  background:var(--carbon-suave);
+  border:1px solid var(--crema-08);
+  border-radius:12px;
+  padding:16px 18px;
+}
+.campo .etiqueta{
+  display:block;
+  font-family:var(--f-label);
+  font-weight:700;
+  font-size:11.5px;
+  letter-spacing:0.14em;
+  text-transform:uppercase;
+  color:var(--ocre);
+  text-shadow:0 0 12px rgba(221,167,62,0.45);
+  margin-bottom:8px;
+}
+.campo p{font-size:15.5px;color:rgba(242,239,230,0.82)}
+
+.senales{margin-bottom:26px}
+.senales .etiqueta{
+  display:block;
+  font-family:var(--f-label);
+  font-weight:700;
+  font-size:11.5px;
+  letter-spacing:0.14em;
+  text-transform:uppercase;
+  color:var(--ocre);
+  text-shadow:0 0 12px rgba(221,167,62,0.45);
+  margin-bottom:6px;
+}
+.senales ul{list-style:none}
+.senales li{
+  padding:10px 0 10px 26px;
+  position:relative;
+  font-size:15.5px;
+  color:rgba(242,239,230,0.82);
+  border-top:1px solid var(--crema-08);
+}
+.senales li::before{
+  content:'→';
+  position:absolute;left:0;top:10px;
+  color:var(--ocre);
+  font-family:var(--f-mono);
+  text-shadow:0 0 8px rgba(221,167,62,0.6);
+}
+
+.marcador{
+  border:1px dashed var(--crema-40);
+  border-radius:14px;
+  padding:18px 20px 20px;
+}
+.marcador .pregunta{
+  font-family:var(--f-label);
+  font-weight:600;
+  font-size:14px;
+  margin-bottom:12px;
+}
+.marcador .niveles{display:flex;flex-wrap:wrap;gap:8px}
+.marcador button{
+  font-family:var(--f-label);
+  font-weight:600;
+  font-size:13.5px;
+  color:var(--crema);
+  background:var(--carbon-suave);
+  border:1.5px solid var(--crema-15);
+  border-radius:100px;
+  padding:9px 18px;
+  cursor:pointer;
+  transition:border-color 0.15s ease,background 0.15s ease,box-shadow 0.15s ease;
+}
+.marcador button:hover{border-color:var(--ocre);box-shadow:0 0 12px rgba(221,167,62,0.15)}
+.marcador button:focus-visible{outline:3px solid var(--ocre);outline-offset:2px}
+.marcador button.activo{
+  border-color:var(--ocre);
+  background:rgba(221,167,62,0.14);
+  box-shadow:0 0 16px rgba(221,167,62,0.25);
+}
+
+/* ---------- Contador fijo ---------- */
+.pildora{
+  position:fixed;
+  right:18px;bottom:18px;
+  z-index:10;
+  font-family:var(--f-mono);
+  font-size:12.5px;
+  color:var(--crema);
+  background:var(--carbon-suave);
+  border:1px solid var(--crema-40);
+  border-radius:100px;
+  padding:9px 16px;
+  cursor:pointer;
+  box-shadow:0 4px 18px rgba(0,0,0,0.5),0 0 14px rgba(221,167,62,0.12);
+  transition:opacity 0.3s ease,transform 0.3s ease;
+}
+.pildora.oculta{opacity:0;pointer-events:none;transform:translateY(8px)}
+.pildora.completa{border-color:var(--ocre);box-shadow:0 4px 18px rgba(0,0,0,0.5),0 0 18px rgba(221,167,62,0.4)}
+
+/* ---------- Repertorio ---------- */
+#repertorio{padding-top:72px;padding-bottom:60px;border-top:1px solid var(--crema-08)}
+#repertorio h2{
+  font-family:var(--f-display);
+  font-weight:600;
+  font-size:clamp(30px,5vw,42px);
+  margin:8px 0 12px;
+}
+#repertorio .explica{color:rgba(242,239,230,0.72);max-width:56ch;margin-bottom:26px}
+.repertorio-intro{text-align:center}
+.repertorio-intro .explica{margin-left:auto;margin-right:auto}
+
+.faltan{margin:18px 0 6px}
+.faltan p{font-size:15px;color:rgba(242,239,230,0.72);margin-bottom:12px}
+.faltan .chips{display:flex;flex-wrap:wrap;gap:8px}
+.faltan .chips button{
+  font-family:var(--f-label);
+  font-weight:600;
+  font-size:13px;
+  color:var(--crema);
+  background:transparent;
+  border:1.5px solid var(--terracota);
+  border-radius:100px;
+  padding:7px 15px;
+  cursor:pointer;
+  box-shadow:0 0 12px rgba(181,83,42,0.25);
+}
+.faltan .chips button:hover{background:rgba(181,83,42,0.15)}
+
+.lectura{margin-top:34px;text-align:center}
+.lectura .titular{
+  font-family:var(--f-display);
+  font-weight:700;
+  font-size:clamp(28px,5vw,38px);
+  color:var(--ocre);
+  text-shadow:0 0 26px rgba(221,167,62,0.4);
+  margin-bottom:6px;
+}
+.lectura .subtitular{
+  font-family:var(--f-mono);
+  font-size:13px;
+  color:var(--crema-40);
+  margin-bottom:20px;
+}
+.lectura .cuerpo{color:rgba(242,239,230,0.85);max-width:60ch;margin:0 auto 22px}
+
+.ala{
+  background:var(--carbon-suave);
+  border:1px solid var(--crema-15);
+  border-left:3px solid var(--ocre);
+  border-radius:0 14px 14px 0;
+  padding:16px 20px;
+  margin:0 auto 14px;
+  max-width:520px;
+  text-align:left;
+  box-shadow:inset 3px 0 12px -6px rgba(221,167,62,0.6);
+}
+.ala .nombre-ala{
+  display:block;
+  font-family:var(--f-label);
+  font-weight:700;
+  font-size:12px;
+  letter-spacing:0.13em;
+  text-transform:uppercase;
+  color:var(--ocre);
+  text-shadow:0 0 12px rgba(221,167,62,0.45);
+  margin-bottom:6px;
+}
+.ala p{font-size:15.5px;color:rgba(242,239,230,0.82)}
+
+.carga-linea{
+  font-family:var(--f-mono);
+  font-size:13.5px;
+  color:rgba(242,239,230,0.72);
+  margin:22px 0 26px;
+}
+
+.cierre{
+  border:1px dashed var(--crema-40);
+  border-radius:14px;
+  padding:20px 22px;
+  font-size:15.5px;
+  color:rgba(242,239,230,0.75);
+  margin:28px auto;
+  max-width:560px;
+  text-align:left;
+}
+.cierre strong{color:var(--crema)}
+
+.acciones-finales{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:8px}
+
+footer{
+  padding:40px 0 56px;
+  text-align:center;
+  font-family:var(--f-mono);
+  font-size:12px;
+  letter-spacing:0.1em;
+  color:var(--crema-40);
+}
+
+[hidden]{display:none !important}
+
+@media (prefers-reduced-motion:reduce){
+  *{transition:none !important;animation:none !important}
+  html{scroll-behavior:auto}
+  .reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<header class="hero wrap">
+  <span class="badge">Singular Club</span>
+  <span class="eyebrow" style="display:block;margin-bottom:14px">Colección permanente</span>
+  <h1>Museo de <em>máscaras</em></h1>
+  <p class="sub">Ocho piezas de camuflaje social. Todas funcionan, todas cobran. Recorre la colección y marca las que cuelgan en tu armario.</p>
+</header>
+
+<section class="wrap" id="entrada">
+  <div class="card reveal">
+    <h2>Antes de entrar</h2>
+    <p>Una máscara no es una mentira. Es una herramienta que construiste, casi siempre sin darte cuenta, para atravesar entornos que no estaban hechos para ti.</p>
+    <p>Aquí no se juzga ninguna pieza: se cataloga, se explica y se le pone precio. <strong>El problema nunca fue tener máscaras. Fue no poder elegir cuándo quitártelas.</strong></p>
+  </div>
+  <div class="card reveal">
+    <h2>Cómo funciona la visita</h2>
+    <p>Ocho salas, una máscara por sala: qué hace, qué te ha dado y qué te cobra, con las señales de que la llevas puesta. Debajo de cada pieza, marca si la usas.</p>
+    <p>Al final, el museo te devuelve la lectura de tu repertorio y puedes llevártela en una imagen privada.</p>
+    <p class="privacidad">La visita es privada. Nada sale de tu dispositivo.</p>
+  </div>
+  <div class="reveal" style="margin:28px 0 56px">
+    <button class="btn" id="btn-entrar">Entrar al museo</button>
+  </div>
+</section>
+
+<div id="museo-contenido" hidden>
+<div class="wrap" id="salas"></div>
+
+<section class="wrap" id="repertorio">
+  <div class="repertorio-intro">
+    <span class="eyebrow">La última sala</span>
+    <h2>Tu repertorio</h2>
+    <p class="explica">El museo cierra la visita con una lectura de conjunto: qué patrón forman tus máscaras, qué se refuerzan entre sí y cuánta energía se va en mantenimiento de vestuario.</p>
+    <button class="btn" id="btn-lectura">Generar mi lectura</button>
+  </div>
+  <div class="faltan" id="faltan" hidden></div>
+  <div class="lectura" id="lectura" hidden></div>
+</section>
+</div>
+
+<button class="pildora oculta" id="pildora" aria-label="Ir a tu repertorio">0 / 8</button>
+
+<footer>SINGULAR BY DESIGN · LO SINGULAR, EN PLURAL</footer>
+
+<script>
+/* ============================================================
+   CONFIG · Singular Club
+   ============================================================ */
+const CONFIG = {
+  marca: 'SINGULAR CLUB',
+  titulo: 'Mi repertorio de máscaras',
+  tagline: 'Singular by design · Lo singular, en plural',
+  archivoPNG: 'mi-repertorio-de-mascaras',
+  colores: { carbon: '#171511', crema: '#F2EFE6', ocre: '#DDA73E', terracota: '#B5532A' }
+};
+
+/* ============================================================
+   DATOS · Las ocho máscaras
+   svg: contenido interno del SVG (viewBox 0 0 200 240)
+   ============================================================ */
+const MASCARAS = [
+{
+  id: 'gracioso', num: '01', nombre: 'El Gracioso',
+  color: '#DDA73E', glow: 'rgba(221,167,62,0.45)',
+  adq: 'Adquisición habitual: el patio del colegio',
+  lema: '“Si se ríen contigo, no se ríen de ti.”',
+  narr: 'Descubriste pronto que el humor es un pararrayos: mientras el grupo se ríe, nadie examina. El chiste llega antes que la pregunta incómoda, la anécdota ensayada tapa el silencio, y tú diriges la atención en lugar de sufrirla.',
+  funcion: 'Controlar el foco. El Gracioso decide de qué se habla y de qué no, y compra aprecio a cambio de espectáculo.',
+  coste: 'El personaje no tiene días malos. Cuando necesitas que te tomen en serio, el traje pesa: la tristeza de los graciosos no suele encontrar público.',
+  senales: [
+    'Tienes anécdotas ensayadas, con pausas y remate incluidos',
+    'Haces el chiste sobre ti antes de que otro pueda hacerlo',
+    'Te han dicho “qué gracioso eres” en días que por dentro eran ruina'
+  ],
+  svg: '<ellipse cx="100" cy="122" rx="80" ry="98" fill="#DDA73E"/>' +
+       '<path d="M52,96 Q68,76 84,96" stroke="#171511" stroke-width="7" fill="none" stroke-linecap="round"/>' +
+       '<path d="M116,96 Q132,76 148,96" stroke="#171511" stroke-width="7" fill="none" stroke-linecap="round"/>' +
+       '<path d="M52,146 Q100,202 148,146 Q100,170 52,146 Z" fill="#171511"/>' +
+       '<circle cx="42" cy="128" r="7" fill="#B5532A" opacity="0.55"/>' +
+       '<circle cx="158" cy="128" r="7" fill="#B5532A" opacity="0.55"/>'
+},
+{
+  id: 'invisible', num: '02', nombre: 'El Invisible',
+  color: 'rgba(242,239,230,0.55)', glow: 'rgba(242,239,230,0.22)',
+  adq: 'Adquisición habitual: cualquier aula con sitio al fondo',
+  lema: '“Lo que no se ve no se evalúa.”',
+  narr: 'Tu apuesta fue la contraria: si el error social ocurre al exponerse, la solución es no exponerse. Volumen bajo, opiniones neutras, presencia mínima. Un camuflaje tan eficaz que a veces funciona hasta cuando no quieres.',
+  funcion: 'Reducir la superficie de ataque. Cero exposición, cero errores, cero conflicto.',
+  coste: 'La invisibilidad no distingue: te protege del juicio y te esconde de las oportunidades, de los ascensos y de la gente que te habría querido conocer.',
+  senales: [
+    'Eliges el asiento con menos ángulos de visión hacia ti',
+    'Tus respuestas están diseñadas para no generar segunda pregunta',
+    'Has salido de reuniones donde nadie recordaba si estuviste'
+  ],
+  svg: '<ellipse cx="100" cy="122" rx="78" ry="96" fill="rgba(242,239,230,0.05)" stroke="rgba(242,239,230,0.42)" stroke-width="2" stroke-dasharray="7 9"/>' +
+       '<circle cx="72" cy="102" r="4" fill="rgba(242,239,230,0.45)"/>' +
+       '<circle cx="128" cy="102" r="4" fill="rgba(242,239,230,0.45)"/>' +
+       '<line x1="88" y1="158" x2="112" y2="158" stroke="rgba(242,239,230,0.3)" stroke-width="3" stroke-linecap="round"/>'
+},
+{
+  id: 'hipercompetente', num: '03', nombre: 'El Hipercompetente',
+  color: '#E3C377', glow: 'rgba(227,195,119,0.45)',
+  adq: 'Adquisición habitual: la primera vez que un sobresaliente tapó una rareza',
+  lema: '“Que el trabajo hable, para no tener que hablar yo.”',
+  narr: 'En algún momento hiciste el cálculo: al que rinde se le perdonan las rarezas. Así que el listón subió, y subió, y se quedó ahí arriba. La excelencia como salvoconducto: mientras seas imprescindible, nadie pregunta por qué comes siempre lo mismo o nunca vas a las cañas.',
+  funcion: 'Comprar tolerancia con rendimiento. Las excentricidades del que resuelve se llaman carácter, no problema.',
+  coste: 'El salvoconducto caduca cada día y hay que renovarlo. Pedir ayuda se vuelve impensable, descansar da culpa, y tu valor queda soldado a tu último resultado.',
+  senales: [
+    'Prefieres hacerlo tú antes que explicar cómo se hace',
+    'Un error pequeño te genera una alarma desproporcionada',
+    'No recuerdas la última vez que entregaste algo “suficiente” en vez de impecable'
+  ],
+  svg: '<polygon points="100,16 170,58 180,142 132,224 68,224 20,142 30,58" fill="#E3C377"/>' +
+       '<g stroke="rgba(23,21,17,0.22)" stroke-width="1.5">' +
+       '<line x1="100" y1="16" x2="20" y2="142"/><line x1="100" y1="16" x2="180" y2="142"/>' +
+       '<line x1="30" y1="58" x2="132" y2="224"/><line x1="170" y1="58" x2="68" y2="224"/>' +
+       '</g>' +
+       '<polygon points="100,16 130,34 108,62 92,44" fill="rgba(242,239,230,0.3)"/>' +
+       '<polygon points="50,98 88,92 88,104 50,108" fill="#171511"/>' +
+       '<polygon points="150,98 112,92 112,104 150,108" fill="#171511"/>' +
+       '<line x1="76" y1="168" x2="124" y2="168" stroke="#171511" stroke-width="6" stroke-linecap="round"/>'
+},
+{
+  id: 'camaleon', num: '04', nombre: 'El Camaleón',
+  color: '#3E8E7E', glow: 'rgba(62,142,126,0.45)',
+  adq: 'Adquisición habitual: el segundo grupo de amigos',
+  lema: '“Dime con quién estoy y te diré quién soy.”',
+  narr: 'Tu técnica es la más sofisticada del museo: absorbes el idioma, el humor, las opiniones y hasta el acento del grupo de turno. No imitas a una persona, imitas a un ecosistema entero. Funcionas en todas partes, que es distinto de pertenecer a alguna.',
+  funcion: 'Encaje universal. Cada grupo recibe una versión compatible, y las fricciones desaparecen.',
+  coste: 'Mantener versiones en paralelo es carísimo, y hay una pregunta que vuelve por las noches: cuando no hay nadie delante, ¿cuál de todos soy? El pánico a que dos de tus grupos coincidan en la misma sala es la factura hecha escena.',
+  senales: [
+    'Tu acento y tus muletillas cambian según con quién hables',
+    'Tus opiniones se ajustan a la sala sin que lo decidas',
+    'La idea de juntar a tus amigos de sitios distintos te da vértigo'
+  ],
+  svg: '<path d="M100,24 C40,24 22,78 24,128 C26,176 56,220 100,220 C144,220 174,176 176,128 C178,78 160,24 100,24 Z" fill="#3E8E7E"/>' +
+       '<path d="M100,24 C40,24 22,78 24,128 C26,176 56,220 100,220 L92,196 L108,172 L92,148 L108,124 L92,100 L108,76 L94,50 Z" fill="#B5532A"/>' +
+       '<circle cx="60" cy="104" r="11" fill="#171511"/>' +
+       '<rect x="122" y="98" width="34" height="10" rx="5" fill="#171511"/>' +
+       '<path d="M54,164 Q77,152 100,164 Q123,176 146,164" stroke="#171511" stroke-width="6" fill="none" stroke-linecap="round"/>'
+},
+{
+  id: 'complaciente', num: '05', nombre: 'El Complaciente',
+  color: '#D98C7E', glow: 'rgba(217,140,126,0.45)',
+  adq: 'Adquisición habitual: la primera bronca que decidiste que sería la última',
+  lema: '“Un sí a tiempo evita mil explicaciones.”',
+  narr: 'Aprendiste que el conflicto es caro y que explicarte es más caro todavía, así que optimizaste: decir que sí. A los planes, a las opiniones, a los favores. La paz social garantizada al módico precio de tu agenda, tus fines de semana y, con los años, tus preferencias.',
+  funcion: 'Eliminar el rechazo de raíz. Quien no contradice no genera enemigos ni tiene que justificar un no.',
+  coste: 'El resentimiento de baja intensidad se acumula como el polvo. Y las preferencias, de no usarse, se atrofian: llega un día en que “¿qué te apetece?” es una pregunta genuinamente difícil.',
+  senales: [
+    '“Me da igual” es tu respuesta automática, aunque no te dé igual',
+    'Dices que sí en la conversación y buscas la excusa después',
+    'Tu agenda tiene cosas que no recuerdas haber querido'
+  ],
+  svg: '<ellipse cx="100" cy="124" rx="82" ry="94" fill="#D98C7E"/>' +
+       '<path d="M54,102 Q70,118 86,102" stroke="#171511" stroke-width="7" fill="none" stroke-linecap="round"/>' +
+       '<path d="M114,102 Q130,118 146,102" stroke="#171511" stroke-width="7" fill="none" stroke-linecap="round"/>' +
+       '<path d="M78,158 Q100,174 122,158" stroke="#171511" stroke-width="6" fill="none" stroke-linecap="round"/>' +
+       '<circle cx="46" cy="134" r="8" fill="rgba(181,83,42,0.35)"/>' +
+       '<circle cx="154" cy="134" r="8" fill="rgba(181,83,42,0.35)"/>'
+},
+{
+  id: 'analista', num: '06', nombre: 'El Analista',
+  color: '#6E9E97', glow: 'rgba(110,158,151,0.45)',
+  adq: 'Adquisición habitual: la biblioteca, sección comportamiento humano',
+  lema: '“Lo que no sale de fábrica se aprende por ingeniería inversa.”',
+  narr: 'Donde otros improvisan, tú investigas. Patrones de conversación, catálogos de respuestas, ensayos en la ducha, análisis completo al llegar a casa. Has convertido lo social en una disciplina de estudio, y la dominas como se domina un temario: con esfuerzo consciente y sin que deje de ser un examen.',
+  funcion: 'Sustituir la intuición que no vino de serie por un sistema que sí funciona. Y funciona.',
+  coste: 'La conversación nunca es descanso: es ejecución en tiempo real con monitorización. Lo imprevisto rompe el guion, y procesar tanto deja poco ancho de banda para lo que se supone que era el objetivo, la conexión.',
+  senales: [
+    'Ensayas conversaciones que quizá nunca ocurran',
+    'Tienes respuestas preparadas para las preguntas probables',
+    'Al llegar a casa repites la escena entera buscando el fallo'
+  ],
+  svg: '<rect x="28" y="30" width="144" height="184" rx="22" fill="#6E9E97"/>' +
+       '<g stroke="rgba(23,21,17,0.16)" stroke-width="1.5">' +
+       '<line x1="64" y1="30" x2="64" y2="214"/><line x1="100" y1="30" x2="100" y2="214"/><line x1="136" y1="30" x2="136" y2="214"/>' +
+       '<line x1="28" y1="76" x2="172" y2="76"/><line x1="28" y1="122" x2="172" y2="122"/><line x1="28" y1="168" x2="172" y2="168"/>' +
+       '</g>' +
+       '<circle cx="68" cy="100" r="19" fill="none" stroke="#171511" stroke-width="5"/>' +
+       '<line x1="68" y1="74" x2="68" y2="82" stroke="#171511" stroke-width="3"/>' +
+       '<line x1="68" y1="118" x2="68" y2="126" stroke="#171511" stroke-width="3"/>' +
+       '<rect x="118" y="95" width="28" height="9" rx="4" fill="#171511"/>' +
+       '<line x1="82" y1="170" x2="118" y2="170" stroke="#171511" stroke-width="5" stroke-linecap="round"/>'
+},
+{
+  id: 'distante', num: '07', nombre: 'El Distante',
+  color: '#8A8D93', glow: 'rgba(138,141,147,0.4)',
+  adq: 'Adquisición habitual: el día que “raro” dolió más que “borde”',
+  lema: '“Mejor frío que raro.”',
+  narr: 'Hiciste una elección de marca: si la expresión espontánea genera malentendidos, mejor no expresar. Cara neutra, respuestas cortas, cero efusividad. La gente te lee como serio, distante, quizá borde. Tú sabes que dentro hay de todo, pero el canal de salida está cerrado por obras.',
+  funcion: 'Blindaje. Lo que no muestras no se puede malinterpretar ni usar en tu contra.',
+  coste: 'La fama de borde que no eres. La gente deja de intentarlo, y el cariño que sí sientes se queda sin idioma: acabas queriendo en modo práctico (arreglar, resolver, acompañar) y esperando que se note.',
+  senales: [
+    '“Al principio pensaba que me odiabas” es una frase que has oído más de una vez',
+    'Emociones grandes por dentro, expresión plana por fuera',
+    'Demuestras afecto arreglando cosas, no diciéndolas'
+  ],
+  svg: '<polygon points="44,32 156,32 168,46 168,208 156,222 44,222 32,208 32,46" fill="#8A8D93"/>' +
+       '<line x1="56" y1="100" x2="90" y2="100" stroke="#171511" stroke-width="7" stroke-linecap="round"/>' +
+       '<line x1="110" y1="100" x2="144" y2="100" stroke="#171511" stroke-width="7" stroke-linecap="round"/>' +
+       '<line x1="72" y1="168" x2="128" y2="168" stroke="#171511" stroke-width="7" stroke-linecap="round"/>'
+},
+{
+  id: 'interrogador', num: '08', nombre: 'El Interrogador',
+  color: '#9C82AE', glow: 'rgba(156,130,174,0.45)',
+  adq: 'Adquisición habitual: la primera conversación que sobrevivió a base de preguntas',
+  lema: '“Quien pregunta dirige. Quien responde se expone.”',
+  narr: 'Tu descubrimiento fue elegante: a la gente le encanta hablar de sí misma, y mientras habla, tú no te expones. Una pregunta bien puesta y el foco gira. Sales de cada conversación con la biografía completa del otro y sin haber soltado la tuya. Te llaman buen conversador. Técnicamente, no has conversado.',
+  funcion: 'Desviar el foco de forma indetectable. El otro se va encantado y tú te vas intacto.',
+  coste: 'Relaciones asimétricas: eres el confidente de todos y el conocido de todos. Nadie llega a quererte de verdad porque nunca les diste material, y cuando alguien pregunta de verdad por ti, el músculo de responder está dormido.',
+  senales: [
+    'Devuelves cada pregunta con otra pregunta',
+    'Sabes la vida entera de gente que no sabe tu segundo apellido',
+    'Cuando el foco gira hacia ti, el cuerpo pide salida'
+  ],
+  svg: '<path d="M108,22 C160,30 178,92 168,140 C158,196 118,226 86,218 C42,208 24,150 34,98 C44,48 74,16 108,22 Z" fill="#9C82AE"/>' +
+       '<path d="M56,74 Q76,58 98,72" stroke="#171511" stroke-width="6" fill="none" stroke-linecap="round"/>' +
+       '<circle cx="76" cy="104" r="16" fill="#171511"/>' +
+       '<circle cx="136" cy="98" r="6" fill="#171511"/>' +
+       '<path d="M96,158 q20,-14 32,-2 q9,10 -3,17 q-9,5 -12,-2" stroke="#171511" stroke-width="5.5" fill="none" stroke-linecap="round"/>' +
+       '<circle cx="116" cy="192" r="4.5" fill="#171511"/>'
+}
+];
+
+const NIVEL_ETIQUETA = { 2: 'De diario', 1: 'A veces', 0: 'Nunca' };
+
+/* ============================================================
+   DATOS · Alas (parejas que se refuerzan)
+   ============================================================ */
+const ALAS = [
+  { par: ['gracioso', 'complaciente'], nombre: 'El ala del apaciguamiento',
+    texto: 'El Gracioso y El Complaciente trabajan juntos: dos formas de mantener la sala contenta para que la sala no se vuelva contra ti. Mucho radar puesto en el humor ajeno y poco espacio para el propio.' },
+  { par: ['hipercompetente', 'distante'], nombre: 'El ala de la armadura',
+    texto: 'El Hipercompetente y El Distante se refuerzan: el valor se demuestra con resultados y las emociones se quedan en el almacén. Blindaje doble, y el doble de difícil que alguien entre.' },
+  { par: ['camaleon', 'analista'], nombre: 'El ala del laboratorio',
+    texto: 'El Analista y El Camaleón son la cadena de montaje completa del camuflaje: uno estudia el patrón, el otro lo reproduce. Ingeniería social de nivel doctorado, con consumo de doctorado.' },
+  { par: ['invisible', 'interrogador'], nombre: 'El ala del desvío',
+    texto: 'El Invisible y El Interrogador comparten estrategia: que el foco nunca llegue a ti, sea desapareciendo o girándolo hacia otro. El resultado es el mismo, te conocen poco.' }
+];
+
+/* ============================================================
+   ESTADO
+   ============================================================ */
+const niveles = {};
+MASCARAS.forEach(m => { niveles[m.id] = null; });
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+let lecturaGenerada = false;
+const revealObserver = (!reduceMotion && 'IntersectionObserver' in window)
+  ? new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); revealObserver.unobserve(e.target); }
+      });
+    }, { threshold: 0.1 })
+  : null;
+
+/* ============================================================
+   RENDER · Salas
+   ============================================================ */
+function svgCompleto(m, ancho) {
+  const w = ancho || 210;
+  return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 240" width="' + w + '" height="' + Math.round(w * 1.2) + '" role="img" aria-label="Máscara: ' + m.nombre + '">' + m.svg + '</svg>';
+}
+
+function focoDe(glow) {
+  return glow.replace(/,\s*[\d.]+\)$/, ',0.16)');
+}
+
+function pintarSalas() {
+  const cont = document.getElementById('salas');
+  MASCARAS.forEach(m => {
+    const sala = document.createElement('section');
+    sala.className = 'sala';
+    sala.id = 'sala-' + m.id;
+    sala.innerHTML =
+      '<div class="placa reveal">' +
+        '<span class="num-pieza">Pieza nº ' + m.num + ' · Colección camuflaje social</span>' +
+        '<span class="adquisicion">' + m.adq + '</span>' +
+      '</div>' +
+      '<div class="vitrina reveal">' +
+        '<div class="foco" style="background:radial-gradient(circle at 50% 42%, ' + focoDe(m.glow) + ' 0%, transparent 62%)"></div>' +
+        '<div style="filter:drop-shadow(0 0 28px ' + m.glow + ')">' + svgCompleto(m) + '</div>' +
+        '<div class="titulo-pieza">' + m.nombre + '</div>' +
+        '<div class="lema">' + m.lema + '</div>' +
+      '</div>' +
+      '<p class="narrativa reveal">' + m.narr + '</p>' +
+      '<div class="ficha reveal">' +
+        '<div class="campo"><span class="etiqueta">Función</span><p>' + m.funcion + '</p></div>' +
+        '<div class="campo"><span class="etiqueta">El coste</span><p>' + m.coste + '</p></div>' +
+      '</div>' +
+      '<div class="senales reveal"><span class="etiqueta">Señales de que la llevas puesta</span><ul>' +
+        m.senales.map(s => '<li>' + s + '</li>').join('') +
+      '</ul></div>' +
+      '<div class="marcador reveal">' +
+        '<p class="pregunta">¿Cuelga en tu armario?</p>' +
+        '<div class="niveles" role="group" aria-label="Marca si usas esta máscara">' +
+          '<button type="button" data-mascara="' + m.id + '" data-nivel="2">La uso</button>' +
+          '<button type="button" data-mascara="' + m.id + '" data-nivel="1">La uso a veces</button>' +
+          '<button type="button" data-mascara="' + m.id + '" data-nivel="0">Nunca la uso</button>' +
+        '</div>' +
+      '</div>';
+    cont.appendChild(sala);
+  });
+
+  cont.addEventListener('click', (e) => {
+    const b = e.target.closest('button[data-mascara]');
+    if (!b) return;
+    const id = b.dataset.mascara;
+    niveles[id] = parseInt(b.dataset.nivel, 10);
+    b.parentElement.querySelectorAll('button').forEach(x => x.classList.toggle('activo', x === b));
+    actualizarPildora();
+    if (lecturaGenerada) generarLectura();
+  });
+}
+
+/* ============================================================
+   PÍLDORA DE PROGRESO
+   ============================================================ */
+const pildora = document.getElementById('pildora');
+
+function marcadas() {
+  return Object.values(niveles).filter(v => v !== null).length;
+}
+
+function actualizarPildora() {
+  const n = marcadas();
+  pildora.textContent = n + ' / 8';
+  pildora.classList.toggle('completa', n === 8);
+}
+
+pildora.addEventListener('click', () => {
+  document.getElementById('repertorio').scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' });
+});
+
+window.addEventListener('scroll', () => {
+  const pasadaEntrada = window.scrollY > document.getElementById('entrada').offsetTop + 200;
+  const enRepertorio = window.scrollY + window.innerHeight > document.getElementById('repertorio').offsetTop + 200;
+  pildora.classList.toggle('oculta', !pasadaEntrada || enRepertorio);
+}, { passive: true });
+
+document.getElementById('btn-entrar').addEventListener('click', () => {
+  const museo = document.getElementById('museo-contenido');
+  if (museo.hidden) {
+    museo.hidden = false;
+    // Observar los reveals que estaban dentro del contenedor oculto
+    if (revealObserver) {
+      museo.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+    } else {
+      museo.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+    }
+  }
+  requestAnimationFrame(() => {
+    document.getElementById('sala-gracioso').scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' });
+  });
+});
+
+/* ============================================================
+   LECTURA DEL REPERTORIO
+   ============================================================ */
+function titularRepertorio(diarias, ocasionales) {
+  if (diarias >= 4) return {
+    t: 'Vestuario completo',
+    c: 'Usas a diario ' + diarias + ' de las ocho piezas. Eso es un despliegue de habilidad social enorme y una factura energética a juego: cada máscara diaria es un segundo trabajo sin nómina. La pregunta no es si eres capaz de sostenerlo, está claro que sí. Es cuánto te está costando.'
+  };
+  if (diarias >= 2) return {
+    t: 'Repertorio de gira',
+    c: 'Varias piezas en rotación diaria: cambias de máscara según el escenario, como una compañía en gira. Versatilidad real, con el coste del cambio de vestuario. Las transiciones entre contextos son tus momentos más caros, y también donde más se nota si un día el telón no sube.'
+  };
+  if (diarias === 1) return {
+    t: 'La pieza principal',
+    c: null
+  };
+  if (ocasionales >= 3) return {
+    t: 'Colección de ocasión',
+    c: 'Ninguna pieza de diario y varias de ocasión: enmascaras por situación, no por sistema. Es el patrón más barato del museo y suele indicar que tienes contextos donde no hace falta actuar. Protégelos, son tu infraestructura de descanso.'
+  };
+  if (ocasionales >= 1) return {
+    t: 'Vitrina casi vacía',
+    c: 'Una o dos piezas ocasionales y poco más. Dos lecturas posibles y las dos legítimas: o has construido una vida donde apenas necesitas camuflaje, o tus máscaras no están en esta colección. Si la visita te ha dejado frío, sospecha de la segunda.'
+  };
+  return {
+    t: 'Museo cerrado',
+    c: 'Ninguna pieza marcada. O vives con un nivel de autenticidad que ya lo quisiéramos los demás, o el catálogo no ha dado con las tuyas, o marcar inventarios no es lo tuyo hoy. Las tres opciones son respetables.'
+  };
+}
+
+function textoCarga(carga) {
+  if (carga >= 11) return 'Carga del repertorio: alta · ' + carga + '/16 — mucha energía yéndose en mantenimiento de vestuario. No es un juicio, es una lectura de contador.';
+  if (carga >= 6) return 'Carga del repertorio: media · ' + carga + '/16 — hay margen y hay hábito. Vale la pena mirar qué piezas siguen siendo necesarias y cuáles son inercia de otra época.';
+  if (carga >= 1) return 'Carga del repertorio: baja · ' + carga + '/16 — o buen entorno, o buena selección de batallas. Probablemente ambas.';
+  return '';
+}
+
+function generarLectura() {
+  const faltanCont = document.getElementById('faltan');
+  const lecturaCont = document.getElementById('lectura');
+  const sinMarcar = MASCARAS.filter(m => niveles[m.id] === null);
+
+  if (sinMarcar.length > 0) {
+    lecturaCont.hidden = true;
+    faltanCont.hidden = false;
+    faltanCont.innerHTML =
+      '<p>El museo no cierra la visita con salas sin ver. Te faltan por marcar:</p>' +
+      '<div class="chips">' +
+      sinMarcar.map(m => '<button type="button" data-ir="' + m.id + '">' + m.nombre + '</button>').join('') +
+      '</div>';
+    faltanCont.querySelectorAll('button[data-ir]').forEach(b => {
+      b.addEventListener('click', () => {
+        document.getElementById('sala-' + b.dataset.ir).scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' });
+      });
+    });
+    return;
+  }
+
+  faltanCont.hidden = true;
+  lecturaGenerada = true;
+  document.getElementById('btn-lectura').textContent = 'Actualizar mi lectura';
+
+  const diarias = MASCARAS.filter(m => niveles[m.id] === 2);
+  const ocasionales = MASCARAS.filter(m => niveles[m.id] === 1);
+  const carga = MASCARAS.reduce((a, m) => a + niveles[m.id], 0);
+
+  let tit = titularRepertorio(diarias.length, ocasionales.length);
+  let cuerpo = tit.c;
+  if (tit.t === 'La pieza principal') {
+    cuerpo = diarias[0].nombre + ' es tu máscara de cabecera y el resto son apariciones puntuales. Especializarse abarata el mantenimiento, pero concentra el riesgo: los sitios donde esa máscara no funciona son exactamente los sitios donde no sabes estar. Merece la pena entrenar suplentes o, mejor, contextos donde no haga falta ninguna.';
+  }
+
+  const subt = diarias.length + ' de diario · ' + ocasionales.length + ' de ocasión · ' + (8 - diarias.length - ocasionales.length) + ' fuera del armario';
+
+  const alasActivas = ALAS
+    .map(a => ({ a, suma: niveles[a.par[0]] + niveles[a.par[1]], minimo: Math.min(niveles[a.par[0]], niveles[a.par[1]]) }))
+    .filter(x => x.minimo >= 1 && x.suma >= 3)
+    .sort((x, y) => y.suma - x.suma)
+    .slice(0, 2);
+
+  let html = '<div class="titular">' + tit.t + '</div>' +
+    '<div class="subtitular">' + subt + '</div>' +
+    '<p class="cuerpo">' + cuerpo + '</p>';
+
+  alasActivas.forEach(x => {
+    html += '<div class="ala"><span class="nombre-ala">' + x.a.nombre + '</span><p>' + x.a.texto + '</p></div>';
+  });
+
+  const cargaTxt = textoCarga(carga);
+  if (cargaTxt) html += '<p class="carga-linea">' + cargaTxt + '</p>';
+
+  html += '<div class="cierre"><strong>Recordatorio de la casa:</strong> ninguna de estas piezas te hace falso. Te hicieron falta. La diferencia entre disfraz y herramienta es poder elegir, y eso, el cuándo compensa ponérsela y cómo quitársela sin pagar peaje, se trabaja en el módulo de masking del curso. El museo solo cataloga. La restauración es otra sala.</div>' +
+    '<div class="acciones-finales">' +
+    '<button class="btn" id="btn-descargar">Descargar mi repertorio (PNG)</button>' +
+    '</div>';
+
+  lecturaCont.innerHTML = html;
+  lecturaCont.hidden = false;
+  document.getElementById('btn-descargar').addEventListener('click', descargarPNG);
+}
+
+document.getElementById('btn-lectura').addEventListener('click', () => {
+  generarLectura();
+  if (marcadas() === 8) {
+    document.getElementById('lectura').scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+  }
+});
+
+/* ============================================================
+   PNG · Mi repertorio de máscaras
+   ============================================================ */
+function cargarSVG(m) {
+  return new Promise((res, rej) => {
+    const xml = svgCompleto(m, 200);
+    const url = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(xml)));
+    const img = new Image();
+    img.onload = () => res(img);
+    img.onerror = rej;
+    img.src = url;
+  });
+}
+
+async function descargarPNG() {
+  const btn = document.getElementById('btn-descargar');
+  btn.disabled = true;
+  try {
+    await document.fonts.ready;
+    const imgs = await Promise.all(MASCARAS.map(cargarSVG));
+
+    const W = 1000, H = 900, escala = 2;
+    const canvas = document.createElement('canvas');
+    canvas.width = W * escala;
+    canvas.height = H * escala;
+    const ctx = canvas.getContext('2d');
+    ctx.scale(escala, escala);
+    const col = CONFIG.colores;
+
+    ctx.fillStyle = col.carbon;
+    ctx.fillRect(0, 0, W, H);
+
+    ctx.fillStyle = col.ocre;
+    ctx.font = '500 13px "IBM Plex Mono", monospace';
+    ctx.textAlign = 'left';
+    ctx.fillText(CONFIG.marca, 60, 52);
+
+    ctx.fillStyle = col.crema;
+    ctx.font = '600 30px "Fraunces", Georgia, serif';
+    ctx.fillText(CONFIG.titulo, 60, 92);
+
+    const hoy = new Date();
+    const fecha = String(hoy.getDate()).padStart(2, '0') + '/' + String(hoy.getMonth() + 1).padStart(2, '0') + '/' + hoy.getFullYear();
+    ctx.fillStyle = 'rgba(242,239,230,0.4)';
+    ctx.font = '400 13px "IBM Plex Mono", monospace';
+    ctx.textAlign = 'right';
+    ctx.fillText(fecha, W - 60, 52);
+
+    // Rejilla 4 × 2
+    const celdaW = (W - 120) / 4;
+    const maskW = 118, maskH = 142;
+    MASCARAS.forEach((m, i) => {
+      const colI = i % 4, filaI = Math.floor(i / 4);
+      const cx = 60 + colI * celdaW + celdaW / 2;
+      const y = 140 + filaI * 280;
+      const nivel = niveles[m.id];
+
+      ctx.save();
+      ctx.globalAlpha = nivel === 0 ? 0.22 : 1;
+      ctx.drawImage(imgs[i], cx - maskW / 2, y, maskW, maskH);
+      ctx.restore();
+
+      ctx.textAlign = 'center';
+      ctx.fillStyle = nivel === 0 ? 'rgba(242,239,230,0.35)' : col.crema;
+      ctx.font = '600 14px "Archivo", sans-serif';
+      ctx.fillText(m.nombre, cx, y + maskH + 26);
+
+      ctx.font = '400 11.5px "IBM Plex Mono", monospace';
+      ctx.fillStyle = nivel === 2 ? col.ocre : nivel === 1 ? 'rgba(242,239,230,0.6)' : 'rgba(242,239,230,0.3)';
+      ctx.fillText(NIVEL_ETIQUETA[nivel].toUpperCase(), cx, y + maskH + 46);
+    });
+
+    // Titular y contador
+    const diarias = MASCARAS.filter(m => niveles[m.id] === 2).length;
+    const ocas = MASCARAS.filter(m => niveles[m.id] === 1).length;
+    const carga = MASCARAS.reduce((a, m) => a + niveles[m.id], 0);
+    const tit = titularRepertorio(diarias, ocas).t;
+
+    ctx.strokeStyle = 'rgba(242,239,230,0.15)';
+    ctx.beginPath(); ctx.moveTo(60, 730); ctx.lineTo(W - 60, 730); ctx.stroke();
+
+    ctx.textAlign = 'left';
+    ctx.fillStyle = col.ocre;
+    ctx.font = '700 30px "Fraunces", Georgia, serif';
+    ctx.fillText(tit, 60, 782);
+
+    ctx.fillStyle = 'rgba(242,239,230,0.6)';
+    ctx.font = '400 14px "IBM Plex Mono", monospace';
+    ctx.fillText(diarias + ' de diario · ' + ocas + ' de ocasión · carga ' + carga + '/16', 60, 812);
+
+    ctx.fillStyle = 'rgba(242,239,230,0.4)';
+    ctx.font = '400 11px "IBM Plex Mono", monospace';
+    ctx.textAlign = 'right';
+    ctx.fillText(CONFIG.tagline, W - 60, H - 28);
+
+    canvas.toBlob((blob) => {
+      if (!blob) return;
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = CONFIG.archivoPNG + '.png';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(a.href);
+    }, 'image/png');
+  } catch (e) {
+    alert('No se ha podido generar la imagen en este navegador. Prueba con una captura de pantalla de tu lectura.');
+  } finally {
+    btn.disabled = false;
+  }
+}
+
+/* ============================================================
+   ARRANQUE
+   ============================================================ */
+pintarSalas();
+actualizarPildora();
+
+if (revealObserver) {
+  // Solo los reveals fuera del contenedor oculto; los de dentro se observan al entrar
+  document.querySelectorAll('#entrada .reveal').forEach(el => revealObserver.observe(el));
+} else {
+  document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+}
+</script>
+</body>
+</html>
